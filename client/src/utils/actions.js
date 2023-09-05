@@ -17,3 +17,19 @@ export const UPDATE_CATEGORIES = "UPDATE_CATEGORIES";
 // state created by the UPDATE_CATEGORIES action and display products for that 
 // category from the list we create from the UPDATE_PRODUCTS action.
 export const UPDATE_CURRENT_CATEGORY = "UPDATE_CURRENT_CATEGORY";
+
+// ADD_TO_CART and ADD_MULTIPLE_TO_CART are used by the Cart component. We'll
+//  use the ADD_TO_CART action when we want to add a single item to the cart,
+//   and we'll use the ADD_MULTIPLE_TO_CART action when we want to add multiple
+//    items to the cart.
+export const ADD_TO_CART = 'ADD_TO_CART';
+// ADD_MULTIPLE_TO_CART is used by the Cart component to add multiple items to the cart.
+export const ADD_MULTIPLE_TO_CART = 'ADD_MULTIPLE_TO_CART';
+// REMOVE_FROM_CART is used by the Cart component to remove items from the cart.
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+// UPDATE_CART_QUANTITY is used by the Cart component to update the quantity of an item in the cart.
+export const UPDATE_CART_QUANTITY = 'UPDATE_CART_QUANTITY';
+// CLEAR_CART is used by the Cart component to empty the cart of all items.
+export const CLEAR_CART = 'CLEAR_CART';
+// TOGGLE_CART is used by the Cart component to control when the cart is visible or hidden.
+export const TOGGLE_CART = 'TOGGLE_CART';
