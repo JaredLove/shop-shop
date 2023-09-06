@@ -3,13 +3,13 @@ import { useQuery } from '@apollo/client';
 import { QUERY_CATEGORIES } from '../../utils/queries';
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../../utils/actions';
-
+import { idbPromise } from '../../utils/helpers';
 function CategoryMenu() {
   const [state, dispatch] = useStoreContext();
 
   const { categories } = state;
   
-  const { data: categoryData } = useQuery(QUERY_CATEGORIES);
+  const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 //Now when this component loads and the response from the useQuery() Hook returns, the useEffect() Hook notices that categoryData is not undefined anymore 
 // and runs the dispatch() function, setting our category data to the global state!
 
@@ -21,16 +21,24 @@ function CategoryMenu() {
 // But the beauty of the useEffect() Hook is that it not only runs on component load, but also when some form of state changes in that 
 // component. So when useQuery() finishes, and we have data in categoryData, the useEffect() Hook runs again and notices that categoryData 
 // exists! Because of that, it does its job and executes the dispatch() function.
-  useEffect(() => {
-    // if categoryData exists or has changed from the response of useQuery, then run dispatch()
-    if (categoryData) {
-      // execute our dispatch function with our action object indicating the type of action and the data to set our state for categories to
+useEffect(() => {
+  if (categoryData) {
+    dispatch({
+      type: UPDATE_CATEGORIES,
+      categories: categoryData.categories
+    });
+    categoryData.categories.forEach(category => {
+      idbPromise('categories', 'put', category);
+    });
+  } else if (!loading) {
+    idbPromise('categories', 'get').then(categories => {
       dispatch({
         type: UPDATE_CATEGORIES,
-        categories: categoryData.categories
+        categories: categories
       });
-    }
-  }, [categoryData, dispatch]);
+    });
+  }
+}, [categoryData, loading, dispatch]);
 
 
 const handleClick = id => {
