@@ -8,6 +8,10 @@
     "watch": "nodemon",
     "seed": "node config/seeds.js"
   },
+
+  "engines": {
+    "node": "16.x"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
