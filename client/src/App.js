@@ -51,10 +51,8 @@ function App() {
             <Route exact path="/orderHistory" component={OrderHistory} />
             <Route exact path="/products/:id" component={Detail} />
             <Route component={NoMatch} />
-            <Route
-            path="/success"
-            element={<Success />}
-          />
+            <Route path="/success" element={<Success />} />
+           <Route path="*" element={<NoMatch />} />
           </Switch>
           </StoreProvider>
         </div>

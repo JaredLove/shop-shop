@@ -51,7 +51,9 @@ function ProductList() {
       return state.products;
     }
         // This is an arrow function that defines the condition for filtering the products array. It takes each product as an argument and checks if the category._id property of the product is equal to the currentCategory variable.
-    return state.products.filter(product => product.category._id === currentCategory);
+        return state.products.filter(
+          (product) => product.category._id === currentCategory
+        );
   }
 
   return (
